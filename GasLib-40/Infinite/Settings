@@ -1,0 +1,73 @@
+Common settings (run_MPC.py and run_MPC_no_V.py)
+=================================================
+
+Finite horizon: 12 h (1 cycle)
+Sampling time: 1 h
+Demand cycle: 12 h, sinusoidal, +/-5%
+Simulation period: 120 h
+
+Initial condition:
+  state/reference file = css_41.xlsx
+  infinite-tail default pressure = 55 bar
+  unfix_P_at_t0 = True
+  compressor_P at t = 0 is unfixed during controller initialization
+  and before every MPC controller solve
+
+Infinite-domain mapping: gamma = 0.1
+Discretization: LAGRANGE-RADAU
+Infinite finite elements: NFE = 10
+Collocation points per element: NCP = 4
+Compressor power collocation points: reduced to 1 per element
+Tail integration: composite Radau quadrature; singular tau = 1 point omitted
+
+Link finite and infinite horizons:
+  intermediate pipe pressure p
+  compressor power P
+
+Terminal constraints:
+  hard equality for intermediate pipe pressure p
+  hard equality for compressor power P
+  no terminal rho constraint
+  no terminal slack/penalty (terminal_cost = 0)
+
+Infinite mass-balance differential equation:
+  inactive at tau = 0 and tau = 1
+
+Dynamic source boundary conditions:
+  source_1 pressure = 35.01325 bar
+  source_2 pressure = 35.01325 bar
+  source_3 flow fixed at its initial value
+
+IPOPT tolerance: 1e-4
+IPOPT linear solver: ma57
+
+
+run_MPC.py (with Lyapunov stability constraint)
+================================================
+
+Lyapunov tracking variables:
+  intermediate pipe pressure p
+  compressor ratio beta
+
+CSS tail reference: closest integer CSS point; no interpolation
+Stability constraint: enabled
+Lyapunov decrease factor: delta = 0.1
+
+Output:
+  Inf.xlsx
+  Inf.txt
+  Excel includes objective, Lyapunov, and runtime sheets
+
+
+run_MPC_no_V.py (without Lyapunov stability constraint)
+=======================================================
+
+No Lyapunov tracking expressions
+No Lyapunov decrease constraint
+No plant tracking cost
+No Lyapunov result sheet
+
+Output:
+  Inf_no_V.xlsx
+  Inf_no_V.txt
+  Excel includes objective and runtime sheets

@@ -1,0 +1,7 @@
+Inf [Inf.xlsx]
+    Total cost: 14374.47
+    0-12 h cost (including t=12): 1873.69 kWh
+    0-60 h cost (including t=60): 14374.47 kWh
+    CPU time:   46.21 s
+    mpc0:       3.20 s
+    mpc_last:   0.49 s
