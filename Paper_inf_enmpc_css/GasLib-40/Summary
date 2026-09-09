@@ -1,0 +1,51 @@
+=============== 1-cycle eNMPC ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Soft on p, penalty coeff = 1e4
+Lyapunov: p & P
+=============== 1-cycle tracking ===============
+Objective: p & P & pSource3 tracking
+ICs: fix p0 & P0
+Terminal constraints: None, penalty coeff = N/A
+Lyapunov: None
+=============== 1-cycle no V ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Soft on p, penalty coeff = 1e4
+Lyapunov: None
+=============== 10-cycle eNMPC ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Soft on p, penalty coeff = 1e4
+Lyapunov: p & P
+=============== 10-cycle tracking ===============
+Objective: p & P & pSource3 tracking
+ICs: fix p0 & P0
+Terminal constraints: None, penalty coeff = N/A
+Lyapunov: None
+=============== 10-cycle no V ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Soft on p, penalty coeff = 1e4
+Lyapunov: None
+=============== inf eNMPC ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Hard on p & P, penalty coeff = N/A
+Lyapunov: p & beta
+Link: P & p
+nfe = 10, ncp = 4
+=============== inf no V ===============
+Objective: P
+ICs: fix p0 & P0
+Terminal constraints: Hard on p & P, penalty coeff = N/A
+Lyapunov: None
+Link: P & p
+nfe = 10, ncp = 4
+=============== inf tracking ===============
+Objective: p & P & pSource3 tracking
+ICs: fix p0 & P0
+Terminal constraints: None, penalty coeff = N/A
+Lyapunov: None
+Link: P & p
+nfe = 2, ncp = 2

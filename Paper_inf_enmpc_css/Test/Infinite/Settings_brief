@@ -1,0 +1,7 @@
+Endpoint: 1e4 * L1 (p + P + rho)
+Link f & inf: p + P
+Lyapunov: beta + p
+Diff eqns: inactive at tau = 0，1
+tol: 1e-4
+
+No interpolation involved at reference, use closest point

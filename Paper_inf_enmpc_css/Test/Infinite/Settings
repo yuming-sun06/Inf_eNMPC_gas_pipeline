@@ -1,0 +1,36 @@
+Finite horizon: 6 h (1 cycle)
+Sampling time: 1 h
+Demand cycle: 6 h, sinusoidal, +/-20%
+Simulation period: 60 h
+
+Initial condition:
+  generated from a steady-state solve
+  default pressure initialization = 55 bar
+  source_1 pressure in steady-state solve = 40 bar
+  initial compressor beta = [1.2, 1.2, 1.1]
+  finite controller initial pipe pressure and compressor power come from the steady state
+
+Infinite-domain mapping: gamma = 0.1
+Discretization: LAGRANGE-RADAU
+Infinite finite elements: NFE = 3
+Collocation points per element: NCP = 3
+Compressor power collocation points: reduced to 1 per element
+Tail integration: composite Radau quadrature; singular tau = 1 point omitted
+
+Link finite & infinite horizons: intermediate pipe pressure p + compressor power P
+Terminal constraints: soft equalities for p + P + rho
+Terminal penalty: 1e4 * L1 terminal slack
+
+Lyapunov variables: p + beta
+Stability constraint: enabled
+Lyapunov decrease factor: delta = 0.1
+
+Infinite mass-balance differential equation: inactive at tau = 0 and tau = 1
+CSS tail reference: closest integer CSS point; no interpolation
+
+IPOPT tolerance: 1e-4
+IPOPT linear solver: ma57
+
+Output:
+  Infinite.xlsx
+  Infinite.txt

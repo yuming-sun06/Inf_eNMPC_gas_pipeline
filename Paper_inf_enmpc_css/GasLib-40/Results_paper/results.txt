@@ -1,0 +1,53 @@
+1-cycle eNMPC [finite-1-cycle.xlsx]
+    Total cost: 60386.66
+    0-12 h cost (including t=12): 7387.03 kWh
+    0-24 h cost (including t=24): 13309.64 kWh
+    0-60 h cost (including t=60): 30963.78 kWh
+    CPU time:   827.74 s
+    mpc0:       17.84 s
+    mpc_last:   9.24 s
+
+1-cycle tracking [finite-1-cycle_tracking.xlsx]
+    Total cost: 60317.11
+    0-12 h cost (including t=12): 7323.26 kWh
+    0-24 h cost (including t=24): 13229.56 kWh
+    0-60 h cost (including t=60): 30887.43 kWh
+    CPU time:   466.59 s
+    mpc0:       4.58 s
+    mpc_last:   3.80 s
+
+10-cycle eNMPC [finite-10-cycle.xlsx]
+    Total cost: 60181.89
+    0-12 h cost (including t=12): 6950.81 kWh
+    0-24 h cost (including t=24): 13064.18 kWh
+    0-60 h cost (including t=60): 30758.18 kWh
+    CPU time:   10683.85 s
+    mpc0:       219.47 s
+    mpc_last:   70.85 s
+
+10-cycle tracking [finite-10-cycle_tracking.xlsx]
+    Total cost: 60314.36
+    0-12 h cost (including t=12): 7323.27 kWh
+    0-24 h cost (including t=24): 13229.30 kWh
+    0-60 h cost (including t=60): 30886.20 kWh
+    CPU time:   4122.39 s
+    mpc0:       45.77 s
+    mpc_last:   32.80 s
+
+Inf eNMPC [Inf.xlsx]
+    Total cost: 60187.43
+    0-12 h cost (including t=12): 7029.83 kWh
+    0-24 h cost (including t=24): 13095.22 kWh
+    0-60 h cost (including t=60): 30763.39 kWh
+    CPU time:   4203.91 s
+    mpc0:       130.82 s
+    mpc_last:   29.14 s
+
+Inf tracking [Inf_tracking.xlsx]
+    Total cost: 60315.11
+    0-12 h cost (including t=12): 7321.95 kWh
+    0-24 h cost (including t=24): 13228.20 kWh
+    0-60 h cost (including t=60): 30885.81 kWh
+    CPU time:   2007.42 s
+    mpc0:       46.95 s
+    mpc_last:   16.06 s
