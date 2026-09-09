@@ -1,0 +1,300 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,booktabs,geometry,microtype}
+\geometry{margin=1in}
+
+\newcommand{\css}{\mathrm{css}}
+\newcommand{\fin}{\mathrm{fin}}
+
+\title{Infinite-Horizon Tail: Current Formulation and the Effect of Discounting}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Notation}
+
+The controller uses a finite horizon $[0,T_f]$ followed by a compactified
+infinite tail $[T_f,\infty)$ mapped onto $\tau\in[0,1)$ by
+%
+\begin{equation}
+  t \;=\; T_f + L\,\operatorname{atanh}\tau,
+  \qquad
+  \gamma \;=\; \frac{1}{L},
+  \qquad
+  \frac{\mathrm{d}t}{\mathrm{d}\tau} \;=\; \frac{1}{\gamma\bigl(1-\tau^{2}\bigr)} .
+  \label{eq:transform}
+\end{equation}
+%
+Thus $\tau=1$ corresponds to $t=\infty$. The tail is discretised with
+$n_{\mathrm{fe}}=5$ elements and $n_{\mathrm{cp}}=3$ collocation points per
+element. Let $\mathcal{K}$ denote the set of quadrature nodes.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\rho_{p,v}(\tau)$ & pipe density (differential state) \\
+$p_{p,v}(\tau)$    & interior pipe pressure \texttt{interm\_p} (algebraic) \\
+$\beta_s(\tau)$    & compressor pressure ratio (control) \\
+$P_s(\tau)$        & compressor power \\
+$w_v,\;c_v$        & cell inlet flow and local consumption \\
+$(\cdot)^{\css}$   & cyclic-steady-state reference \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Current Formulation}
+
+\subsection{Tail quadrature}
+
+Every tail integral is evaluated as an explicit weighted sum,
+%
+\begin{equation}
+  \Phi_\bullet \;=\; \sum_{k\in\mathcal{K}} \frac{w_k}{\gamma}\,
+                     \ell_\bullet(\tau_k),
+  \qquad
+  \boxed{\;\tau=1 \notin \mathcal{K}\;}
+  \label{eq:quad}
+\end{equation}
+%
+with the transformation Jacobian folded into the weights,
+%
+\begin{equation}
+  w_k \;=\;
+  \begin{cases}
+    \displaystyle\int_{\mathrm{elem}} L_k(\tau)\,\frac{\mathrm{d}\tau}{1-\tau^{2}},
+      & \text{\textsc{lagrange-radau}},\\[2.2ex]
+    \displaystyle\frac{h_i\,\omega_k}{1-\tau_k^{2}},
+      & \text{\textsc{lagrange-legendre}} .
+  \end{cases}
+  \label{eq:weights}
+\end{equation}
+%
+The node $\tau=1$ is excluded because the Jacobian $1/(1-\tau^{2})$ is singular
+there. On a Radau mesh $\tau=1$ \emph{is} a collocation point, and the
+remaining Lagrange bases satisfy $L_k(1)=0$; that root cancels the pole
+analytically,
+%
+\begin{equation}
+  \frac{L_k(\tau)}{1-\tau^{2}}
+  \;=\;\frac{(1-\tau)\,q_k(\tau)}{(1-\tau)(1+\tau)}
+  \;=\;\frac{q_k(\tau)}{1+\tau},
+\end{equation}
+%
+so all weights in \eqref{eq:weights} are finite.
+
+\subsection{Stage costs}
+
+Three stage costs are integrated over the tail, and they are \emph{not} of the
+same type:
+%
+\begin{align}
+  \ell_P(\tau)      &= \sum_{s}\frac{P_s(\tau)}{1000}
+                       &&\text{absolute, economic}, \label{eq:lP}\\
+  \ell_V(\tau)      &= \sum_{(p,v)}\bigl(p_{p,v}(\tau)-p^{\css}_{p,v}(\tau)\bigr)^{2}
+                       &&\text{tracking}, \\
+  \ell_\beta(\tau)  &= \sum_{s}\bigl(\beta_s(\tau)-\beta^{\css}_s(\tau)\bigr)^{2}
+                       &&\text{tracking}.
+\end{align}
+
+\subsection{Objective}
+
+\begin{equation}
+  J \;=\;
+  \underbrace{\sum_{t<t_f}\sum_{s}\frac{P_{s,t}\,\Delta t}{1000}}_{\text{finite horizon}}
+  \;+\;
+  \underbrace{3600\,\sigma\,\Phi_P}_{\text{tail}}
+  \;+\;
+  \underbrace{\mu\sum_{p,v}\bigl(s^{+}_{p,v}+s^{-}_{p,v}\bigr)}_{\text{terminal }L_1}
+  \label{eq:obj}
+\end{equation}
+%
+with $\Delta t=3600\,\mathrm{s}$ and $\sigma=1$ (no tail overestimation
+factor). The Lyapunov function and its descent inequality are imposed
+separately,
+%
+\begin{equation}
+  V \;=\; \frac{p_{\fin}}{f_p} + \frac{\Phi_V}{\inf_p}
+        + \frac{\beta_{\fin}}{f_\beta} + \frac{\Phi_\beta}{\inf_\beta},
+  \qquad
+  V_k \;\le\; V_{k-1} - \delta\,\ell^{\mathrm{plant}}_{k-1}.
+  \label{eq:lyap}
+\end{equation}
+
+\subsection{Terminal condition ($L_1$-soft)}
+
+\begin{equation}
+  p_{p,v}(\tau{=}1) \;=\; p^{\css}_{p,v} + s^{+}_{p,v} - s^{-}_{p,v},
+  \qquad s^{\pm}_{p,v}\ge 0,
+  \label{eq:terminal}
+\end{equation}
+%
+penalised in \eqref{eq:obj} by $\mu$. The $L_1$ form is an \emph{exact}
+penalty: above a finite threshold its solution coincides with the
+hard-constrained one wherever that is feasible, and it concentrates any
+residual violation on the rows that genuinely cannot be met.
+
+\subsection{Equations retained at $\tau=1$}
+
+On a Radau mesh $\tau=1$ is a collocation point and is exempt from pruning, so
+it carries the full algebraic system: equation of state, momentum balance,
+nonlinear speed and friction, node and node-source mass balances, and the
+compressor-station relations. The pipe mass balance degenerates there, since
+$\gamma(1-\tau^{2})\to 0$:
+%
+\begin{equation}
+  \underbrace{\gamma\bigl(1-\tau^{2}\bigr)\,\dot\rho_{p,v}\,V_{\mathrm{cell}}}_{\;\to\;0}
+  \;=\; w_v - w_{v+1} - c_v
+  \qquad\Longrightarrow\qquad
+  \boxed{\;w_v - w_{v+1} - c_v \;=\; 0\;}
+  \label{eq:steady}
+\end{equation}
+%
+i.e.\ the terminal point is required to be a genuine steady state. Together
+with \eqref{eq:terminal} this fixes both \emph{where} the tail ends and
+\emph{that} it has stopped moving.
+
+\begin{quote}\small
+\textbf{Remark (\textsc{legendre}).} Under a Legendre mesh $\tau=1$ is not a
+collocation point. Only the differential state survives there, through its
+continuity (extrapolation) equation
+$\rho(1)=\sum_k \ell_k(1)\,\rho(\tau_k)$, and \eqref{eq:steady} cannot be
+written because no flow variable exists at $\tau=1$. Pinning an
+\emph{algebraic} variable such as $p_{p,v}(1)$ is then vacuous, and restoring
+the algebraic equations at $\tau=1$ conflicts with the extrapolation: the
+$25$ densities are extrapolated independently, one per pipe volume, whereas
+the algebraic system couples them (e.g.\ three pipes share
+$\texttt{node\_p}[\mathrm{sink}_1]$).
+\end{quote}
+
+\subsection{Why $\Phi_P$ is ill-posed}
+
+$\ell_V$ and $\ell_\beta$ vanish as the tail approaches the reference, so
+their integrals converge and \eqref{eq:quad} approximates a finite quantity.
+The economic stage cost \eqref{eq:lP} does not: if $P\to P^{\css}\neq 0$, then
+over $N$ periods
+%
+\begin{equation}
+  \int_{T_f}^{T_f+NT} \ell_P \,\mathrm{d}t \;=\; N\,\bar\ell_P\,T
+  \;\xrightarrow[N\to\infty]{}\; \infty .
+\end{equation}
+%
+Each period contributes a fixed positive amount. The finite value returned by
+\eqref{eq:quad} is therefore a truncation artefact, not an approximation: the
+weights represent only
+%
+\begin{equation}
+  \sum_{k\in\mathcal{K}} \frac{w_k}{\gamma} \;\approx\; 11.6\ \text{h}
+  \;\approx\; 1.9\ \text{periods}
+  \qquad (T=6\,\text{h}),
+\end{equation}
+%
+and this effective horizon is set by $n_{\mathrm{fe}}$, $n_{\mathrm{cp}}$ and
+$L$ rather than chosen.
+
+\section{Effect of Introducing a Discount}
+
+\subsection{Discounted tail cost}
+
+Replace the tail integral by its discounted counterpart, with rate
+$\alpha>0$:
+%
+\begin{equation}
+  \Phi_P^{\alpha}
+  \;=\;\int_{T_f}^{\infty} e^{-\alpha (t-T_f)}\,\ell_P(t)\,\mathrm{d}t .
+\end{equation}
+%
+Using \eqref{eq:transform} and
+$\operatorname{atanh}\tau=\tfrac12\ln\frac{1+\tau}{1-\tau}$,
+%
+\begin{equation}
+  e^{-\alpha L \operatorname{atanh}\tau}
+  \;=\;\left(\frac{1-\tau}{1+\tau}\right)^{p},
+  \qquad p \;\equiv\; \frac{\alpha L}{2},
+\end{equation}
+%
+so that
+%
+\begin{equation}
+  \Phi_P^{\alpha}
+  \;=\; L\int_0^1 \ell_P(\tau)\,
+        \frac{(1-\tau)^{\,p-1}}{(1+\tau)^{\,p+1}}\,\mathrm{d}\tau .
+  \label{eq:disc-integral}
+\end{equation}
+
+\subsection{What changes}
+
+\paragraph{(i) The integral converges.}
+The integrand in \eqref{eq:disc-integral} behaves as $(1-\tau)^{p-1}$ near
+$\tau=1$, which is integrable iff
+%
+\begin{equation}
+  p-1 > -1
+  \quad\Longleftrightarrow\quad
+  p>0
+  \quad\Longleftrightarrow\quad
+  \alpha>0 .
+\end{equation}
+%
+The undiscounted case $p=0$ is exactly the non-integrable borderline; any
+positive discount crosses it.
+
+\paragraph{(ii) $\tau=1$ becomes an admissible quadrature node.}
+The weights become
+%
+\begin{equation}
+  w_k \;=\; \int_{\mathrm{elem}} L_k(\tau)\,
+            \frac{(1-\tau)^{\,p-1}}{(1+\tau)^{\,p+1}}\,\mathrm{d}\tau ,
+  \label{eq:disc-weights}
+\end{equation}
+%
+which is finite for \emph{every} node, including $\tau=1$ (there $L_{\rm
+end}$ is bounded and the singularity is integrable). The exclusion
+$\tau=1\notin\mathcal{K}$ in \eqref{eq:quad} can be dropped, together with the
+$L_k(1)=0$ cancellation used for the Radau branch. If $p\ge 1$ the integrand
+vanishes at $\tau=1$ altogether.
+
+\paragraph{(iii) The stage cost is unchanged.}
+Equation \eqref{eq:lP} is untouched: the objective remains absolute
+compressor energy, with no $\css$ reference. Only the weights
+\eqref{eq:weights} are replaced by \eqref{eq:disc-weights}. This distinguishes
+discounting from the rotated cost $\ell_P-\ell_P^{\css}$, which restores
+convergence only by introducing a tracking reference.
+
+\paragraph{(iv) The terminal point is no longer free of charge.}
+Because $w_{\rm end}$ is finite and large for small $p$, the power at
+$\tau=1$ enters the objective. In the undiscounted formulation $\tau=1$ is
+constrained by \eqref{eq:steady} but never priced, so operating there costs
+nothing.
+
+\paragraph{(v) The effective horizon becomes an explicit modelling choice.}
+The implicit $\approx 1.9$ periods is replaced by the discount time constant
+$1/\alpha$, which carries an economic interpretation (net present value)
+rather than being a by-product of $n_{\mathrm{fe}}$, $n_{\mathrm{cp}}$ and
+$L$.
+
+\subsection{What does \emph{not} change}
+
+\begin{enumerate}
+\item \textbf{The optimal policy still favours not compressing.} Minimising
+      discounted energy rewards reducing $P$ exactly as before; the tail can
+      still serve demand from line pack instead of from the source. That
+      degeneracy lives in the constraints, not in the objective, and no
+      reweighting removes it.
+\item \textbf{The terminal condition \eqref{eq:terminal} and the steady-state
+      requirement \eqref{eq:steady} are unaffected.}
+\item \textbf{The Lyapunov terms \eqref{eq:lyap} are unaffected}, since
+      $\Phi_V$ and $\Phi_\beta$ already converge without discounting.
+\end{enumerate}
+
+\subsection{Cost of the change}
+
+A new parameter $\alpha$ enters, and the solution is no longer
+discount-neutral: near-term operation is weighted more heavily than the far
+tail. With $p=\alpha L/2$, the choice $p\ge 1$ (i.e.\ $\alpha\ge 2/L$)
+gives the cleanest numerics but implies a short discount horizon; a longer,
+more physical horizon such as $1/\alpha = 24\,$h gives $p\approx 0.21$, which
+is integrable but leaves the weights strongly peaked near $\tau=1$.
+
+\end{document}

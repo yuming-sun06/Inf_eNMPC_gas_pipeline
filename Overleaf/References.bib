@@ -1,0 +1,207 @@
+@incollection{GHILARDI2024,
+  title = {Nonlinear dynamic optimization for gas pipelines operation},
+  editor = {Flavio Manenti and Gintaras V. Reklaitis},
+  series = {Computer Aided Chemical Engineering},
+  publisher = {Elsevier},
+  volume = {53},
+  pages = {1657--1662},
+  year = {2024},
+  booktitle = {34th European Symposium on Computer Aided Process Engineering / 15th International Symposium on Process Systems Engineering},
+  issn = {1570-7946},
+  doi = {https://doi.org/10.1016/B978-0-443-28824-1.50277-5},
+  url = {https://www.sciencedirect.com/science/article/pii/B9780443288241502775},
+  author = {Lavinia Ghilardi and Sakshi Naik and Emanuele Martelli and Francesco Casella and Lorenz T. Biegler},
+  keywords = {Gas networks, dynamic optimization, complementarity, nonlinear programming},
+  abstract = {Natural gas is one of the major energy resources employed in many sectors, and its transport is guaranteed by large-scale pipelines, which need to be properly managed in order to ensure an efficient operation. This paper proposes a Nonlinear Programming (NLP) algorithm to control the operation of gas networks and minimize the compressor energy consumption, as well as model the discretized dynamic gas transport equations in the pipelines, include detailed performance maps of compressors and their gas turbine drivers, and regulate control valves. This work proposes a nonlinear smoothing approach to model disjunctive operating configurations of the gas system, allowing to preserve the accuracy and exploit the computational speed of nonlinear algorithms. The algorithm is effectively applied to a test network featuring a complex branched topology, and the results are compared with a Mixed Integer Linear Programming (MILP) formulation, thus showing a significant reduction of the computational time, and an improvement in terms of accuracy of optimality of the solution.}
+}
+
+@article{keerthi1988,
+  author = {Keerthi, S. S. and Gilbert, E. G.},
+  title = {Optimal infinite-horizon feedback laws for a general class of constrained discrete-time systems: {S}tability and moving-horizon approximations},
+  journal = {Journal of Optimization Theory and Applications},
+  year = {1988},
+  volume = {57},
+  number = {2},
+  pages = {265--293},
+  month = may,
+  doi = {10.1007/BF00938540},
+  issn = {1573-2878},
+  url = {https://doi.org/10.1007/BF00938540}
+}
+
+@misc{gaslib_website,
+  title = {{GasLib}},
+  url = {https://gaslib.zib.de/}
+}
+
+@article{zavala2014stochastic,
+  title={Stochastic optimal control model for natural gas networks},
+  author={Zavala, Victor M},
+  journal={Computers \& Chemical Engineering},
+  volume={64},
+  pages={103--113},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{NAIK2026122276,
+title = {Multistage economic MPC for systems with a cyclic steady state: A gas network case study},
+journal = {Chemical Engineering Science},
+volume = {319},
+pages = {122276},
+year = {2026},
+issn = {0009-2509},
+doi = {https://doi.org/10.1016/j.ces.2025.122276},
+url = {https://www.sciencedirect.com/science/article/pii/S0009250925010978},
+author = {Sakshi Naik and Lavinia Ghilardi and Robert Parker and Lorenz T. Biegler},
+keywords = {Gas network operations, Dynamic optimization, Nonlinear programming, Nonlinear control, Optimization under uncertainty, Stochastic optimization},
+abstract = {Multistage model predictive control (MPC) provides a robust control strategy for dynamic systems with uncertainties and a setpoint tracking objective. Moreover, extending MPC to minimize an economic cost instead of tracking a pre-calculated optimal setpoint improves controller performance. This paper presents a novel multistage economic nonlinear model predictive control (E-NMPC) framework for dynamic systems operating under uncertainty, with specific application to natural gas transmission networks. A key innovation lies in the integration of cyclic steady-state (CSS) constraints within the multistage MPC formulation, enabling the controller to manage periodic operating conditions commonly observed in energy systems. A Lyapunov-based descent condition is enforced to ensure robust stability of the controller. The multistage economic MPC framework is validated on two gas pipeline case studies, where it successfully minimizes net energy consumption, respects operational constraints under uncertain demand profiles, and guides the network to optimal cyclic operation. The Lyapunov function remains bounded in both case studies, validating the robust stability of multistage E-NMPC.}
+}
+
+@article{DEABREU2025109304,
+title = {A zone-based NMPC scheme integrated with an autoregressive echo state network model: An experimental evaluation in an electrical submersible pump-lifted oil well pilot plant},
+journal = {Computers & Chemical Engineering},
+volume = {203},
+pages = {109304},
+year = {2025},
+issn = {0098-1354},
+doi = {https://doi.org/10.1016/j.compchemeng.2025.109304},
+url = {https://www.sciencedirect.com/science/article/pii/S0098135425003060},
+author = {Odilon S.L. {de Abreu} and Leizer Schnitman and Marcos Pellegrini Ribeiro and Márcio A.F. Martins},
+keywords = {Nonlinear model predictive control, Echo state network, Electrical submersible pump, Artificial lift, Oil production},
+abstract = {This paper presents the first real-time implementation of a novel approach to nonlinear model predictive control (NMPC) with economic objectives, designed to maximize production in a well operated by an electrical submersible pump (ESP). The application of advanced control strategies in ESP systems has significantly expanded over the past decade, as these approaches allow wells to operate under optimal conditions. This results in increased and more stable production, ensuring compliance with process constraints and prolonging equipment lifespan. The proposed controller considers a zone control scheme to systematically accommodate the time-varying operational constraints commonly encountered in ESP systems (downthrust and upthrust). In order to improve the computational challenges of the NMPC law, an auto-regressive Echo State Network (ESNx)-oriented data-driven model is integrated into the closed-loop feedback system to predict controlled variables, utilizing historical measurements from the ESP pilot plant under study. The proposed NMPC approach is implemented in MATLAB/CasADi, and real-time communication (read and write) is achieved using an industrial communication protocol. Before its application in the real process, the tuning of the NMPC+ESNx controller parameters was empirically performed, initially within a simulation environment to allow for iterative adjustments based on the system’s dynamic performance. Subsequently, this tuning was refined in the pilot plant to guarantee optimal performance in the maximum production region while ensuring computational feasibility. After 5 h of experiments, the results demonstrate economic gains, with a total accumulated production of 17 m3 of oil, while operating close to the pump’s downthrust and upthrust limits. Furthermore, the average computational time of 25 ms per solution highlights the feasibility of implementing the algorithm in industrial hardware (PLC), enhancing its practicality for field operations.}
+}
+
+@article{STABROV202553,
+title = {Physics-based model as a versatile tool towards advanced process control of the naphtha distillation unit},
+journal = {Chemical Engineering Research and Design},
+volume = {218},
+pages = {53-65},
+year = {2025},
+issn = {0263-8762},
+doi = {https://doi.org/10.1016/j.cherd.2025.04.035},
+url = {https://www.sciencedirect.com/science/article/pii/S0263876225002084},
+author = {Sergey Stabrov and Svetlana Shevlyagina},
+keywords = {Model predictive control, Physics-based model, Naphtha distillation, Dynamic simulation, Controllability analysis},
+abstract = {Following the recent successes with low input data variability and soft sensor design under feed composition changes, this study proposes, among other things, the use of a physics-based approach to improve multivariable model predictive control (MPC) of naphtha distillation. Unlike the industrial settings, where the influence of other manipulated variables is difficult to exclude due to the actions of the human operator, a physically based modeling provides close to an ideal step-by-step and one-by-one testing of the chemical process, resulting in improved accuracy of the transfer function matrix used for MPC design. The proposed approach has been tested on canonical and alternative control schemes used in stabilized naphtha production. Importantly, the physics-based model resolved all the issues associated with unavailability to reach the set points in controlling the quality of end products when compared with MPC built on the industrial data only irrespective of the control scheme considered. As a result, the steady-state controllability analysis and the closed-loop process behavior highlight that an alternative control structure with transfer function matrix obtained on a physics-based model is a better choice for the industrial case study. Thus, the developed strategy for MPC design was approved as relevant for the cases when a preliminary control scheme requires an update or optimized control scheme without affecting production is of great demand.}
+}
+
+@ARTICLE{11393908,
+  author={Sambhus, Ruturaj S. and Mehta, Kapi Ketan and Sadeghi, Ali MirMohammad and Imran, Basit Muhammad and Kim, Jeeseop and Chunawala, Taizoon and Pastore, Vittorio and Vijayan, Sujith and Hamed, Kaveh Akbari},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={A Nonlinear MPC Framework for Loco-Manipulation of Quadrupedal Robots With Non-Negligible Manipulator Dynamics}, 
+  year={2026},
+  volume={11},
+  number={4},
+  pages={4050-4057},
+  keywords={Manipulator dynamics;Quadrupedal robots;Dynamics;Robots;Legged locomotion;Computational modeling;Heuristic algorithms;Vectors;Robot kinematics;Optimal control;Legged robots;motion control;multi-contact whole-body motion planning and control},
+  doi={10.1109/LRA.2026.3664229}}
+
+@article{qi2025nmpc,
+  author  = {Qi, Gengxin and Yue, Ming and Liu, Yujie and others},
+  title   = {Integrated {NMPC}-based vehicle stability and tracking control 
+             strategy for heavy-duty truck with road bank angle estimation},
+  journal = {Journal of Vibration and Control},
+  volume  = {32},
+  number  = {11-12},
+  year    = {2025},
+  doi     = {10.1177/10775463251337514}
+}
+
+@article{ELLIS20141156,
+title = {A tutorial review of economic model predictive control methods},
+journal = {Journal of Process Control},
+volume = {24},
+number = {8},
+pages = {1156-1178},
+year = {2014},
+note = {Economic nonlinear model predictive control},
+issn = {0959-1524},
+doi = {https://doi.org/10.1016/j.jprocont.2014.03.010},
+url = {https://www.sciencedirect.com/science/article/pii/S0959152414000900},
+author = {Matthew Ellis and Helen Durand and Panagiotis D. Christofides},
+keywords = {Economic model predictive control, Nonlinear systems, Process control, Process economics, Process optimization},
+abstract = {An overview of the recent results on economic model predictive control (EMPC) is presented and discussed addressing both closed-loop stability and performance for nonlinear systems. A chemical process example is used to provide a demonstration of a few of the various approaches. The paper concludes with a brief discussion of the current status of EMPC and future research directions to promote and stimulate further research potential in this area.}
+}
+
+@ARTICLE{5672577,
+  author={Diehl, Moritz and Amrit, Rishi and Rawlings, James B.},
+  journal={IEEE Transactions on Automatic Control}, 
+  title={A Lyapunov Function for Economic Optimizing Model Predictive Control}, 
+  year={2011},
+  volume={56},
+  number={3},
+  pages={703-707},
+  keywords={Steady-state;Economics;Lyapunov method;Cost function;Asymptotic stability;Biological system modeling;Zinc;Asymptotic stability;economic cost function;model predictive control (MPC);unreachable setpoint},
+  doi={10.1109/TAC.2010.2101291}}
+
+@article{GRIFFITH2018109,
+title = {Robustly stable adaptive horizon nonlinear model predictive control},
+journal = {Journal of Process Control},
+volume = {70},
+pages = {109-122},
+year = {2018},
+issn = {0959-1524},
+doi = {https://doi.org/10.1016/j.jprocont.2018.07.014},
+url = {https://www.sciencedirect.com/science/article/pii/S0959152418301641},
+author = {Devin W. Griffith and Lorenz T. Biegler and Sachin C. Patwardhan},
+keywords = {Predictive control, Process control, Robust stability, Nonlinear control, Nonlinear programming, Model-based control, Multivariable feedback control},
+abstract = {We present a new method for adaptively updating nonlinear model predictive control (NMPC) horizon lengths online via nonlinear programming (NLP) sensitivity calculations. This approach depends on approximation of the infinite horizon problem via selection of terminal conditions, and therefore calculation of non-conservative terminal conditions is key. For this, we also present a new method for calculating terminal regions and costs based on the quasi-infinite horizon framework that extends to large-scale nonlinear systems. This is accomplished via bounds found through simulations under linear quadratic regulator (LQR) control. We show that the resulting controller is Input-to-State practically Stable (ISpS) with a stability constant that depends on the level of nonlinearity in the terminal region. Finally, we demonstrate this approach on a quad-tank system and a large-scale distillation application. Simulation results reveal that the proposed approach is able to achieve significant reduction in average computation time without much loss in the performance with reference to fixed horizon NMPC.}
+}
+
+@ARTICLE{4639448,
+  author={Grune, Lars and Rantzer, Anders},
+  journal={IEEE Transactions on Automatic Control}, 
+  title={On the Infinite Horizon Performance of Receding Horizon Controllers}, 
+  year={2008},
+  volume={53},
+  number={9},
+  pages={2100-2111},
+  keywords={Infinite horizon;Control systems;Optimal control;Nonlinear control systems;Nonlinear systems;Control nonlinearities;Cost function;Linear systems;Predictive control;Extraterrestrial measurements;Dynamic programming;model predictive control (MPC);receding horizon control (RHC);suboptimality},
+  doi={10.1109/TAC.2008.927799}}
+
+@article{CHEN19981205,
+title = {A Quasi-Infinite Horizon Nonlinear Model Predictive Control Scheme with Guaranteed Stability},
+journal = {Automatica},
+volume = {34},
+number = {10},
+pages = {1205-1217},
+year = {1998},
+issn = {0005-1098},
+doi = {https://doi.org/10.1016/S0005-1098(98)00073-9},
+url = {https://www.sciencedirect.com/science/article/pii/S0005109898000739},
+author = {H. Chen and F. Allg\"ower},
+keywords = {Nonlinear model predictive control, stability, terminal inequality constraint, terminal cost, quasi-infinite horizon},
+abstract = {We present in this paper a novel nonlinear model predictive control scheme that guarantees asymptotic closed-loop stability. The scheme can be applied to both stable and unstable systems with input constraints. The objective functional to be minimized consists of an integral square error (ISE) part over a finite time horizon plus a quadratic terminal cost. The terminal state penalty matrix of the terminal cost term has to be chosen as the solution of an appropriate Lyapunov equation. Furthermore, the setup includes a terminal inequality constraint that forces the states at the end of the finite prediction horizon to lie within a prescribed terminal region. If the Jacobian linearization of the nonlinear system to be controlled is stabilizable, we prove that feasibility of the open-loop optimal control problem at time t=0 implies asymptotic stability of the closed-loop system. The size of the region of attraction is only restricted by the requirement for feasibility of the optimization problem due to the input and terminal inequality constraints and is thus maximal in some sense.}
+}
+
+@article{DINH2025103565,
+title = {Nonlinear model predictive control with an infinite horizon approximation},
+journal = {Journal of Process Control},
+volume = {155},
+pages = {103565},
+year = {2025},
+issn = {0959-1524},
+doi = {https://doi.org/10.1016/j.jprocont.2025.103565},
+url = {https://www.sciencedirect.com/science/article/pii/S0959152425001933},
+author = {San Dinh and Yao Tong and Zhenyu Wei and Owen Gerdes and L.T. Biegler},
+keywords = {Nonlinear model predictive control, Infinite Horizon, Nonlinear Programming, Dichotomy, Stability analysis},
+abstract = {Current nonlinear model predictive control (NMPC) strategies are formulated as finite predictive horizon nonlinear programs (NLPs), which maintain NMPC stability and recursive feasibility through the construction of terminal cost functions and/or terminal constraints. However, computing these terminal properties may pose formidable challenges with a fixed horizon, particularly in the context of nonlinear dynamic processes. Motivated by these issues, we introduce an alternate moving horizon approach where the final element in the horizon is constructed from an infinite-horizon time transformation. The key feature of this approach lies in solving the proposed NMPC formulation as an extended boundary value problem, using orthogonal collocation on finite elements. Numerical stability is ensured through a dichotomy property for an infinite horizon optimal control problem, which pins down the unstable modes, extending beyond open-loop stable dynamic systems, and leads to both asymptotic and robust stability guarantees. The efficacy of the proposed NMPC formulation is demonstrated on three case studies, which validate the practical application and robustness of the developed approach on real-world problems.}
+}
+
+
+% Add more references below in this format:
+%   author = {Author, A. and Another, B.},
+%   title = {Title of the paper},
+%   journal = {Journal Name},
+%   year = {2023},
+%   volume = {10},
+%   pages = {123--145}
+% }
+
+% @book{author2022,
+%   author = {Author, C.},
+%   title = {Title of the book},
+%   publisher = {Publisher Name},
+%   year = {2022}
+% }
